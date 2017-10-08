@@ -1,2 +1,9 @@
-# CarND-Term1-P2
-Traffic Sign Classifier
+# Classifying Traffic Signs on the Road
+
+## Term 1 - Project 2
+
+This repo contains source code and support files for CarND-Term1 Project 2.
+
+Jupyter notebook is [here](./Notebook.ipynb).
+
+Final report is [here](./project_report.md).
