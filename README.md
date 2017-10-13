@@ -6,4 +6,4 @@ This repo contains source code and support files for CarND-Term1 Project 2.
 
 Jupyter notebook is [here](./Notebook.ipynb).
 
-Final report is [here](./project_report.md).
+Final report is [here](./writeup.md).
