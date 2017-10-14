@@ -1,4 +1,4 @@
-#**Traffic Sign Recognition** 
+# Traffic Sign Recognition
 
 
 ---
@@ -20,23 +20,20 @@ signs images;
 
 [image1]: ./output/histogram.png "Histogram"
 [image2]: ./output/evolution_1FD32_L5_E50_B128_R0.0005_A958.png "Evolution for the selected model's hyperparameters"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image3]: ./output/treated.png "Processed images"
+[image4]: ./output/loss_1FD32_L5_E50_B128_R0.0005_A958.png "Loss function"
+[image5]: ./output/webimages.png "Images from web"
 
 ## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
 ---
-###Writeup / README
+### Writeup
 
 This project is available as jupyter notebook [here](./Notebook.ipynb). Also
 in [PDF](./report.pdf).
 
-###Data Set Summary & Exploration
+### Data Set Summary & Exploration
 
 I used the numpy library to calculate summary statistics of the traffic
 signs data set:
@@ -47,13 +44,13 @@ signs data set:
 * The shape of a traffic sign image is 32x32x3
 * The number of unique classes/labels in the data set is 43
 
-####Exploratory visualization
+#### Exploratory visualization
 
 The data set can be plotted as a histogram, showing the number of images for each class.
 
 ![alt text][image1]
 
-###Design and Test a Model Architecture
+### Design and Test a Model Architecture
 
 The model used in this project is based on LeNet-5. LeNet consists of 2 convolutional layers, 1 max pool and 2 fully connected layer.
 The architecture proposed here adds another fully connected layer and uses a deeper convolutional filter.
@@ -63,15 +60,15 @@ Pre-processing was made in two steps:
 - grayscaling with: Gray = 0.299 Red + 0.587 Green + 0.114 Blue
 - normalizing by pixel intensity (pixel / 255) - 0.5
 
-This steps were applied to training, validation and testing, so images had consistent treatment.
+These steps were applied to training, validation and testing, so images had consistent treatment.
 The data set used was the original provided.
 
+![alt text][image3]
 
 My final model consisted of the following layers:
 
-|:---------------------:|:---------------------------------------------:| 
 | Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
+|-----------------------|-----------------------------------------------| 
 | Input         		| 32x32x1 grayscale image   					| 
 | Convolution 5x5     	| 1x1 stride, valid padding, outputs 28x28x16 	|
 | RELU					|												|
@@ -86,11 +83,75 @@ My final model consisted of the following layers:
 | Fully connected		| Input 129, outputs 86							|
 | RELU					|												|
 | Fully connected		| Input 86, outputs 43							|
-|:---------------------:|:---------------------------------------------:| 
  
 
 
-To train the model it was used the Adam Optimizer (which is based on Kingma and Ba's algorithm. Best results were found for 50 epochs, batch of 128 and learning rate 0.005.
+To train the model it was used the Adam Optimizer (which is based on Kingma and 
+Ba's algorithm. Best results were found for 50 epochs, batch of 128 and 
+learning rate 0.005.
 
 ![alt text][image2]
+
+![alt text][image4]
+
+Jupyter input cell In[5] contains the python function. The function was coded 
+with a factory pattern, a form of closure. This makes it reusable with different 
+number of output classes.
+
+Alternative combinations of hyperparameters were tried:
+
+- batch size 128, 50 epochs and learning rate 0.01: validation accuracy 89%
+- batch size 256, 100 epochs and learning rate 0.0001: validation accuracy 90%
+- batch size 256, 100 epochs and learning rate 0.0005: validation accuracy 93%
+
+My final model results were:
+
+* training set accuracy of 99%
+* validation set accuracy of 95% 
+* test set accuracy of 92%
+
+To develop the model, an iterative approach was chosen. The first architecture
+(original LeNet) could reach 89%. Project target was 93% on validation. So, 
+model needed improvements.
+
+To improve the model it was chosen to increase the number of layer, adding
+fully connected layers and it was increased the convolutional filter's depth.
+This approach allows the model to identify higher complexity connections in
+data.
+
+The learning rate of 0.01 of found to be too high, and 0.0001 too low, and final
+version uses 0.0005. Batch size is more related to the computations then the
+results.
+
+The result of 99% in training and 40% in test #2, it may indicate a bit of
+overfiting. A dropout layer would be a suggested option to further increase
+the model.
+
+Using images in grayscale avoids problems with image's backgrounds and reduces
+the number of layers. But there's a loss of information.
+
+Considering the three accuracy results, the model is shown to behave as expected.
+
+
+### Test a Model on New Images
+
+Here are five German traffic signs that I found on the web:
+
+![alt text][image5]
+
+| Image	|     Description	    | Class | 
+|-------|-----------------------|-------|
+| 1   	| stop  				|  14 	|
+| 2     | no vehicles 			|  15 	|
+| 3		| Pedestrians			|  27 	|
+| 4	    | beware of ice			|  30 	|
+| 5	    | Roundabout			|  40 	|
+
+#### Discussions
+
+The model was able to predict 2 out of 5 new images, 40% accuracy. This result
+is significantly lower than validation (95%) and previous test (92.8%). One
+possible explanation for this difference is the way how the images were resize
+from their original shape.
+
 
