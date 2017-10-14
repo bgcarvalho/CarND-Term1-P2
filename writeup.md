@@ -19,9 +19,9 @@ signs images;
 [//]: # (Image References)
 
 [image1]: ./output/histogram.png "Histogram"
-[image2]: ./output/evolution_1FD32_L5_E50_B128_R0.0005_A958.png "Evolution for the selected model's hyperparameters"
+[image2]: ./output/train_evolution_1FD32_L5_E50_B128_R0.0005_A999.png "Evolution for the selected model's hyperparameters"
 [image3]: ./output/treated.png "Processed images"
-[image4]: ./output/loss_1FD32_L5_E50_B128_R0.0005_A958.png "Loss function"
+[image4]: ./output/train_loss_1FD32_L5_E50_B128_R0.0005_A999.png "Loss function"
 [image5]: ./output/webimages.png "Images from web"
 
 ## Rubric Points
@@ -157,7 +157,7 @@ training images, 32x32x3 (RGB) JPEG.
 The model was able to predict 2 out of 5 new images, 40% accuracy. This result
 is significantly lower than validation (95%) and previous test (92.8%). One
 possible explanation for this difference is the way how the images were resized
-from their original shape (width and height).
+from their original shape (width and height). 
 
 For the first image, the model was very confident, 100%, but for image number 5
 the confidence was only 62%.
