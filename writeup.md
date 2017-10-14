@@ -84,13 +84,16 @@ My final model consisted of the following layers:
 | RELU					|												|
 | Fully connected		| Input 86, outputs 43							|
  
+This architecture was chosen to create a pyramid effect, reducing size of each
+layer and increasing depth.
 
-
-To train the model it was used the Adam Optimizer (which is based on Kingma and 
+To train the model it was used the Adam Optimizer, which is based on Kingma and 
 Ba's algorithm. Best results were found for 50 epochs, batch of 128 and 
 learning rate 0.005.
 
 ![alt text][image2]
+
+Loss function
 
 ![alt text][image4]
 
@@ -114,8 +117,8 @@ To develop the model, an iterative approach was chosen. The first architecture
 (original LeNet) could reach 89%. Project target was 93% on validation. So, 
 model needed improvements.
 
-To improve the model it was chosen to increase the number of layer, adding
-fully connected layers and it was increased the convolutional filter's depth.
+To improve the model it was chosen to increase the number of layers, adding
+fully connected layers and increasing the convolutional filter's depth.
 This approach allows the model to identify higher complexity connections in
 data.
 
@@ -123,9 +126,8 @@ The learning rate of 0.01 of found to be too high, and 0.0001 too low, and final
 version uses 0.0005. Batch size is more related to the computations then the
 results.
 
-The result of 99% in training and 40% in test #2, it may indicate a bit of
-overfiting. A dropout layer would be a suggested option to further increase
-the model.
+The result of 99% in training, 95% on validation and 92% on testing indicates
+that model is balanced, but tending to overfiting.
 
 Using images in grayscale avoids problems with image's backgrounds and reduces
 the number of layers. But there's a loss of information.
@@ -139,19 +141,26 @@ Here are five German traffic signs that I found on the web:
 
 ![alt text][image5]
 
-| Image	|     Description	    | Class | 
-|-------|-----------------------|-------|
-| 1   	| stop  				|  14 	|
-| 2     | no vehicles 			|  15 	|
-| 3		| Pedestrians			|  27 	|
-| 4	    | beware of ice			|  30 	|
-| 5	    | Roundabout			|  40 	|
+All five images are cleary reconizable by humans. The shape is the same as 
+training images, 32x32x3 (RGB) JPEG.
+
+| Image	|     Description	    | Class | Probability |
+|-------|-----------------------|-------|-------------|
+| 1   	| stop  				|  14 	| 100.% 	  |
+| 2     | no vehicles 			|  15 	| 0.13% 	  |
+| 3		| Pedestrians			|  27 	| 0.00% 	  |
+| 4	    | beware of ice			|  30 	| 0.00% 	  |
+| 5	    | Roundabout			|  40 	| 61.6%  	  |
 
 #### Discussions
 
 The model was able to predict 2 out of 5 new images, 40% accuracy. This result
 is significantly lower than validation (95%) and previous test (92.8%). One
-possible explanation for this difference is the way how the images were resize
-from their original shape.
+possible explanation for this difference is the way how the images were resized
+from their original shape (width and height).
+
+For the first image, the model was very confident, 100%, but for image number 5
+the confidence was only 62%.
+
 
 
