@@ -30,8 +30,8 @@ signs images;
 ---
 ### Writeup
 
-This project is available as jupyter notebook [here](./Notebook.ipynb). Also
-in [PDF](./report.pdf).
+This project is available as jupyter notebook [here](./Notebook.ipynb), 
+in [PDF](./report.pdf) or [HTML](./report.html).
 
 ### Data Set Summary & Exploration
 
